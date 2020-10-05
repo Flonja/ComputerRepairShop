@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using VanjaReparatieWinkool.DAL;
 using VanjaReparatieWinkool.Models;
 
@@ -19,7 +20,23 @@ namespace VanjaReparatieWinkool.Controllers
         }
 
         public List<AssignmentModel> GetAssignments() {
-            return db.AssignmentModels.ToList() ?? new List<AssignmentModel>();
+            List<AssignmentModel> assignments = db.AssignmentModels.ToList() ?? new List<AssignmentModel>();
+            assignments.Sort(new AssignmentsCompare());
+
+            return assignments;
+        }
+    }
+
+    class AssignmentsCompare : IComparer<AssignmentModel>
+    {
+        public int Compare(AssignmentModel x, AssignmentModel y)
+        {
+            if (x.Status == y.Status)
+            {
+                return 0;
+            }
+
+            return x.Status.CompareTo(y.Status);
         }
     }
 }

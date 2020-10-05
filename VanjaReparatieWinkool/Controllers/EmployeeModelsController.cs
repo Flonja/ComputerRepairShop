@@ -11,7 +11,7 @@ using VanjaReparatieWinkool.Models;
 
 namespace VanjaReparatieWinkool.Controllers
 {
-    public class EmployeeModelsController : Controller
+    public class EmployeeModelsController : SharedController
     {
         private VanjaReparatieWinkoolContext db = new VanjaReparatieWinkoolContext();
 

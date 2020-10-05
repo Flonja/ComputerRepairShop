@@ -11,14 +11,14 @@ using VanjaReparatieWinkool.Models;
 
 namespace VanjaReparatieWinkool.Controllers
 {
-    public class AssignmentsController : Controller
+    public class AssignmentsController : SharedController
     {
         private VanjaReparatieWinkoolContext db = new VanjaReparatieWinkoolContext();
 
         // GET: AssignmentModels
         public ActionResult Index()
         {
-            return View(db.AssignmentModels.ToList());
+            return View(GetAssignments());
         }
 
         // GET: AssignmentModels/Details/5
@@ -47,10 +47,24 @@ namespace VanjaReparatieWinkool.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AssignmentId,Omschrijving,Status,StartDatum,EindDatum,Uren")] AssignmentModel assignmentModel)
+        public ActionResult Create([Bind(Include = "AssignmentId,Omschrijving,StartDatum,EindDatum")] AssignmentModel assignmentModel)
         {
+            if (assignmentModel.StartDatum.CompareTo(DateTime.Today) < 0)
+            {
+                ModelState.AddModelError("StartDatum", "");
+            }
+
+            if (assignmentModel.EindDatum.CompareTo(assignmentModel.StartDatum) < 0)
+            {
+                ModelState.AddModelError("StartDatum", "");
+                ModelState.AddModelError("EindDatum", "");
+            }
+
             if (ModelState.IsValid)
             {
+                assignmentModel.Uren = 0;
+                assignmentModel.Status = Status.InAfwachting;
+
                 db.AssignmentModels.Add(assignmentModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -79,15 +93,22 @@ namespace VanjaReparatieWinkool.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "AssignmentId,Omschrijving,Status,StartDatum,EindDatum,Uren")] AssignmentModel assignmentModel)
+        public ActionResult Edit([Bind(Include = "AssignmentId,Omschrijving,Status,EindDatum,Uren")] AssignmentModel assignmentModelLocal)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(assignmentModel).State = EntityState.Modified;
+                AssignmentModel assignmentModel = db.AssignmentModels.Find(assignmentModelLocal.AssignmentId);
+                ModelState.Remove("StartDatum");
+
+                assignmentModelLocal.StartDatum = assignmentModel.StartDatum;
+
+                db.AssignmentModels.Remove(assignmentModel);
+                db.AssignmentModels.Add(assignmentModelLocal);
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(assignmentModel);
+            return View(assignmentModelLocal);
         }
 
         // GET: AssignmentModels/Delete/5
