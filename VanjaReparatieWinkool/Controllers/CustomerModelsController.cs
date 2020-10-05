@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using VanjaReparatieWinkool.DAL;
 using VanjaReparatieWinkool.Models;
 
 namespace VanjaReparatieWinkool.Controllers
 {
-    public class CustomerModelsController : Controller
+    public class CustomerModelsController : SharedController
     {
         private VanjaReparatieWinkoolContext db = new VanjaReparatieWinkoolContext();
 
         // GET: CustomerModels
         public ActionResult Index()
         {
-            return View(db.CustomerModels.ToList());
+            return View(db.Customers.ToList());
         }
 
         // GET: CustomerModels/Details/5
@@ -28,7 +24,7 @@ namespace VanjaReparatieWinkool.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CustomerModel customerModel = db.CustomerModels.Find(id);
+            CustomerModel customerModel = db.Customers.Find(id);
             if (customerModel == null)
             {
                 return HttpNotFound();
@@ -51,7 +47,7 @@ namespace VanjaReparatieWinkool.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.CustomerModels.Add(customerModel);
+                db.Customers.Add(customerModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,7 +62,7 @@ namespace VanjaReparatieWinkool.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CustomerModel customerModel = db.CustomerModels.Find(id);
+            CustomerModel customerModel = db.Customers.Find(id);
             if (customerModel == null)
             {
                 return HttpNotFound();
@@ -97,7 +93,7 @@ namespace VanjaReparatieWinkool.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CustomerModel customerModel = db.CustomerModels.Find(id);
+            CustomerModel customerModel = db.Customers.Find(id);
             if (customerModel == null)
             {
                 return HttpNotFound();
@@ -110,8 +106,8 @@ namespace VanjaReparatieWinkool.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            CustomerModel customerModel = db.CustomerModels.Find(id);
-            db.CustomerModels.Remove(customerModel);
+            CustomerModel customerModel = db.Customers.Find(id);
+            db.Customers.Remove(customerModel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -22,3 +22,18 @@ select,
 textarea {
     max-width: 280px;
 }
+
+.statusbar{
+    background-color: darkolivegreen;
+}
+
+.statusbar LI{
+    display:inline;
+}
+.status-wit {
+    color: white;
+}
+
+.status-groen {
+    color: green;
+}

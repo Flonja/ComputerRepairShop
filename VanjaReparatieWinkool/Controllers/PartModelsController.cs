@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using VanjaReparatieWinkool.DAL;
 using VanjaReparatieWinkool.Models;
 
 namespace VanjaReparatieWinkool.Controllers
 {
-    public class PartModelsController : Controller
+    public class PartModelsController : SharedController
     {
         private VanjaReparatieWinkoolContext db = new VanjaReparatieWinkoolContext();
 
         // GET: PartModels
         public ActionResult Index()
         {
-            return View(db.PartModels.ToList());
+            return View(db.Parts.ToList());
         }
 
         // GET: PartModels/Details/5
@@ -28,7 +24,7 @@ namespace VanjaReparatieWinkool.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PartModel partModel = db.PartModels.Find(id);
+            PartModel partModel = db.Parts.Find(id);
             if (partModel == null)
             {
                 return HttpNotFound();
@@ -51,7 +47,7 @@ namespace VanjaReparatieWinkool.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.PartModels.Add(partModel);
+                db.Parts.Add(partModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,7 +62,7 @@ namespace VanjaReparatieWinkool.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PartModel partModel = db.PartModels.Find(id);
+            PartModel partModel = db.Parts.Find(id);
             if (partModel == null)
             {
                 return HttpNotFound();
@@ -97,7 +93,7 @@ namespace VanjaReparatieWinkool.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            PartModel partModel = db.PartModels.Find(id);
+            PartModel partModel = db.Parts.Find(id);
             if (partModel == null)
             {
                 return HttpNotFound();
@@ -110,8 +106,8 @@ namespace VanjaReparatieWinkool.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            PartModel partModel = db.PartModels.Find(id);
-            db.PartModels.Remove(partModel);
+            PartModel partModel = db.Parts.Find(id);
+            db.Parts.Remove(partModel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
-using System.Web;
+﻿using System.Data.Entity;
 using VanjaReparatieWinkool.Models;
 
 namespace VanjaReparatieWinkool.DAL
@@ -13,9 +9,9 @@ namespace VanjaReparatieWinkool.DAL
         {
         }
 
-        public DbSet<EmployeeModel> EmployeeModels { get; set; }
-        public DbSet<CustomerModel> CustomerModels { get; set; }
-        public DbSet<AssignmentModel> AssignmentModels { get; set; }
-        public DbSet<PartModel> PartModels { get; set; }
+        public DbSet<EmployeeModel> Employees { get; set; }
+        public DbSet<CustomerModel> Customers { get; set; }
+        public DbSet<AssignmentModel> Assignments { get; set; }
+        public DbSet<PartModel> Parts { get; set; }
     }
 }

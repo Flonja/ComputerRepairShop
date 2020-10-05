@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 using VanjaReparatieWinkool.DAL;
-using VanjaReparatieWinkool.Models;
+using VanjaReparatieWinkool.ViewModels;
 
 namespace VanjaReparatieWinkool.Controllers
 {
@@ -15,11 +13,19 @@ namespace VanjaReparatieWinkool.Controllers
         [ChildActionOnly]
         public PartialViewResult _Header()
         {
-            return PartialView(GetAssignments());
+            return PartialView(GetStatus());
         }
 
-        public List<AssignmentModel> GetAssignments() {
-            return db.AssignmentModels.ToList() ?? new List<AssignmentModel>();
+        public IEnumerable<AssignmentStatus> GetStatus()
+        {
+            IQueryable<AssignmentStatus> data = from order in db.Assignments
+                                         group order by order.Status into statusGroup
+                                         select new AssignmentStatus()
+                                         {
+                                             RepairStatus = statusGroup.Key,
+                                             StatusCount = statusGroup.Count()
+                                         };
+            return data.ToList();
         }
     }
 }

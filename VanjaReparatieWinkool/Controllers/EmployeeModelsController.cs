@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using VanjaReparatieWinkool.DAL;
 using VanjaReparatieWinkool.Models;
 
 namespace VanjaReparatieWinkool.Controllers
 {
-    public class EmployeeModelsController : Controller
+    public class EmployeeModelsController : SharedController
     {
         private VanjaReparatieWinkoolContext db = new VanjaReparatieWinkoolContext();
 
         // GET: EmployeeModels
         public ActionResult Index()
         {
-            return View(db.EmployeeModels.ToList());
+            return View(db.Employees.ToList());
         }
 
         // GET: EmployeeModels/Details/5
@@ -28,7 +24,7 @@ namespace VanjaReparatieWinkool.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EmployeeModel employeeModel = db.EmployeeModels.Find(id);
+            EmployeeModel employeeModel = db.Employees.Find(id);
             if (employeeModel == null)
             {
                 return HttpNotFound();
@@ -51,7 +47,7 @@ namespace VanjaReparatieWinkool.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.EmployeeModels.Add(employeeModel);
+                db.Employees.Add(employeeModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,7 +62,7 @@ namespace VanjaReparatieWinkool.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EmployeeModel employeeModel = db.EmployeeModels.Find(id);
+            EmployeeModel employeeModel = db.Employees.Find(id);
             if (employeeModel == null)
             {
                 return HttpNotFound();
@@ -97,7 +93,7 @@ namespace VanjaReparatieWinkool.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            EmployeeModel employeeModel = db.EmployeeModels.Find(id);
+            EmployeeModel employeeModel = db.Employees.Find(id);
             if (employeeModel == null)
             {
                 return HttpNotFound();
@@ -110,8 +106,8 @@ namespace VanjaReparatieWinkool.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            EmployeeModel employeeModel = db.EmployeeModels.Find(id);
-            db.EmployeeModels.Remove(employeeModel);
+            EmployeeModel employeeModel = db.Employees.Find(id);
+            db.Employees.Remove(employeeModel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

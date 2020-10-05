@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
-using VanjaReparatieWinkool.DAL;
-using VanjaReparatieWinkool.Models;
+﻿using System.Web.Mvc;
 
 namespace VanjaReparatieWinkool.Controllers
 {
     public class HomeController : SharedController
     {
-        private VanjaReparatieWinkoolContext db = new VanjaReparatieWinkoolContext();
 
         //public ActionResult _Layout()
         //{
@@ -19,7 +12,7 @@ namespace VanjaReparatieWinkool.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.TotalAssignments = db.AssignmentModels.ToList().Count;
+            //ViewBag.TotalAssignments = db.Assignments.ToList().Count;
 
             return View();
         }

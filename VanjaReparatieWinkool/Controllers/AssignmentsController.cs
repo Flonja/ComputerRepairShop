@@ -1,24 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Linq;
 using System.Net;
-using System.Web;
 using System.Web.Mvc;
 using VanjaReparatieWinkool.DAL;
 using VanjaReparatieWinkool.Models;
 
 namespace VanjaReparatieWinkool.Controllers
 {
-    public class AssignmentsController : Controller
+    public class AssignmentsController : SharedController
     {
         private VanjaReparatieWinkoolContext db = new VanjaReparatieWinkoolContext();
 
         // GET: AssignmentModels
         public ActionResult Index()
         {
-            return View(db.AssignmentModels.ToList());
+            return View(db.Assignments.ToList());
         }
 
         // GET: AssignmentModels/Details/5
@@ -28,7 +24,7 @@ namespace VanjaReparatieWinkool.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AssignmentModel assignmentModel = db.AssignmentModels.Find(id);
+            AssignmentModel assignmentModel = db.Assignments.Find(id);
             if (assignmentModel == null)
             {
                 return HttpNotFound();
@@ -51,7 +47,7 @@ namespace VanjaReparatieWinkool.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.AssignmentModels.Add(assignmentModel);
+                db.Assignments.Add(assignmentModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -66,7 +62,7 @@ namespace VanjaReparatieWinkool.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AssignmentModel assignmentModel = db.AssignmentModels.Find(id);
+            AssignmentModel assignmentModel = db.Assignments.Find(id);
             if (assignmentModel == null)
             {
                 return HttpNotFound();
@@ -97,7 +93,7 @@ namespace VanjaReparatieWinkool.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            AssignmentModel assignmentModel = db.AssignmentModels.Find(id);
+            AssignmentModel assignmentModel = db.Assignments.Find(id);
             if (assignmentModel == null)
             {
                 return HttpNotFound();
@@ -110,8 +106,8 @@ namespace VanjaReparatieWinkool.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            AssignmentModel assignmentModel = db.AssignmentModels.Find(id);
-            db.AssignmentModels.Remove(assignmentModel);
+            AssignmentModel assignmentModel = db.Assignments.Find(id);
+            db.Assignments.Remove(assignmentModel);
             db.SaveChanges();
             return RedirectToAction("Index");
         }
