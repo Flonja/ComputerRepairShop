@@ -167,3 +167,4 @@ C:\Users\Jonathan\source\repos\VanjaComputerRepairShop\VanjaReparatieWinkool\obj
 C:\Users\Jonathan\source\repos\VanjaComputerRepairShop\VanjaReparatieWinkool\obj\Debug\VanjaReparatieWinkool.csproj.CopyComplete
 C:\Users\Jonathan\source\repos\VanjaComputerRepairShop\VanjaReparatieWinkool\obj\Debug\VanjaReparatieWinkool.dll
 C:\Users\Jonathan\source\repos\VanjaComputerRepairShop\VanjaReparatieWinkool\obj\Debug\VanjaReparatieWinkool.pdb
+C:\Users\Jonathan\source\repos\VanjaComputerRepairShop\VanjaReparatieWinkool\obj\Debug\VanjaReparatieWinkool.csprojAssemblyReference.cache

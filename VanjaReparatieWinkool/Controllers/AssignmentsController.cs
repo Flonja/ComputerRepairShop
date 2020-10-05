@@ -5,6 +5,7 @@ using System.Net;
 using System.Web.Mvc;
 using VanjaReparatieWinkool.DAL;
 using VanjaReparatieWinkool.Models;
+using VanjaReparatieWinkool.ViewModels;
 
 namespace VanjaReparatieWinkool.Controllers
 {
@@ -36,7 +37,10 @@ namespace VanjaReparatieWinkool.Controllers
         // GET: Assignments/Create
         public ActionResult Create()
         {
-            return View();
+            var viewModel = new AssignmentViewModel();
+            viewModel.Klanten = db.Customers.ToList();
+            //viewModel.Opdracht = 
+            return View(viewModel);
         }
 
         // POST: Assignments/Create
