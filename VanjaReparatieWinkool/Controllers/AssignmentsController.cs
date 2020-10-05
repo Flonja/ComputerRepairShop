@@ -1,4 +1,5 @@
-﻿using System.Data.Entity;
+﻿using System;
+using System.Data.Entity;
 using System.Linq;
 using System.Net;
 using System.Web.Mvc;
@@ -11,13 +12,13 @@ namespace VanjaReparatieWinkool.Controllers
     {
         private VanjaReparatieWinkoolContext db = new VanjaReparatieWinkoolContext();
 
-        // GET: AssignmentModels
+        // GET: Assignments
         public ActionResult Index()
         {
             return View(GetAssignments());
         }
 
-        // GET: AssignmentModels/Details/5
+        // GET: Assignments/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
@@ -32,13 +33,13 @@ namespace VanjaReparatieWinkool.Controllers
             return View(assignmentModel);
         }
 
-        // GET: AssignmentModels/Create
+        // GET: Assignments/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: AssignmentModels/Create
+        // POST: Assignments/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -61,7 +62,7 @@ namespace VanjaReparatieWinkool.Controllers
                 assignmentModel.Uren = 0;
                 assignmentModel.Status = Status.InAfwachting;
 
-                db.AssignmentModels.Add(assignmentModel);
+                db.Assignments.Add(assignmentModel);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
@@ -69,7 +70,7 @@ namespace VanjaReparatieWinkool.Controllers
             return View(assignmentModel);
         }
 
-        // GET: AssignmentModels/Edit/5
+        // GET: Assignments/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -84,7 +85,7 @@ namespace VanjaReparatieWinkool.Controllers
             return View(assignmentModel);
         }
 
-        // POST: AssignmentModels/Edit/5
+        // POST: Assignments/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -93,13 +94,13 @@ namespace VanjaReparatieWinkool.Controllers
         {
             if (ModelState.IsValid)
             {
-                AssignmentModel assignmentModel = db.AssignmentModels.Find(assignmentModelLocal.AssignmentId);
+                AssignmentModel assignmentModel = db.Assignments.Find(assignmentModelLocal.AssignmentId);
                 ModelState.Remove("StartDatum");
 
                 assignmentModelLocal.StartDatum = assignmentModel.StartDatum;
 
-                db.AssignmentModels.Remove(assignmentModel);
-                db.AssignmentModels.Add(assignmentModelLocal);
+                db.Assignments.Remove(assignmentModel);
+                db.Assignments.Add(assignmentModelLocal);
 
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -107,7 +108,7 @@ namespace VanjaReparatieWinkool.Controllers
             return View(assignmentModelLocal);
         }
 
-        // GET: AssignmentModels/Delete/5
+        // GET: Assignments/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
@@ -122,7 +123,7 @@ namespace VanjaReparatieWinkool.Controllers
             return View(assignmentModel);
         }
 
-        // POST: AssignmentModels/Delete/5
+        // POST: Assignments/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)

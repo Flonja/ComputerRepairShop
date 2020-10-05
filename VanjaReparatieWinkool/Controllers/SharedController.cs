@@ -3,6 +3,7 @@ using System.Linq;
 using System.Web.Mvc;
 using System.Web.UI.WebControls;
 using VanjaReparatieWinkool.DAL;
+using VanjaReparatieWinkool.Models;
 using VanjaReparatieWinkool.ViewModels;
 
 namespace VanjaReparatieWinkool.Controllers
@@ -20,15 +21,17 @@ namespace VanjaReparatieWinkool.Controllers
         public IEnumerable<AssignmentStatus> GetStatus()
         {
             IQueryable<AssignmentStatus> data = from order in db.Assignments
-                                         group order by order.Status into statusGroup
-                                         select new AssignmentStatus()
-                                         {
-                                             RepairStatus = statusGroup.Key,
-                                             StatusCount = statusGroup.Count()
-                                         };
+                                                group order by order.Status into statusGroup
+                                                select new AssignmentStatus()
+                                                {
+                                                    RepairStatus = statusGroup.Key,
+                                                    StatusCount = statusGroup.Count()
+                                                };
             return data.ToList();
+        }
+
         public List<AssignmentModel> GetAssignments() {
-            List<AssignmentModel> assignments = db.AssignmentModels.ToList() ?? new List<AssignmentModel>();
+            List<AssignmentModel> assignments = db.Assignments.ToList() ?? new List<AssignmentModel>();
             assignments.Sort(new AssignmentsCompare());
 
             return assignments;
