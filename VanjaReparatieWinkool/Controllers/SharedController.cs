@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Web.Mvc;
+using System.Web.UI.WebControls;
 using VanjaReparatieWinkool.DAL;
 using VanjaReparatieWinkool.ViewModels;
 
@@ -26,6 +27,24 @@ namespace VanjaReparatieWinkool.Controllers
                                              StatusCount = statusGroup.Count()
                                          };
             return data.ToList();
+        public List<AssignmentModel> GetAssignments() {
+            List<AssignmentModel> assignments = db.AssignmentModels.ToList() ?? new List<AssignmentModel>();
+            assignments.Sort(new AssignmentsCompare());
+
+            return assignments;
+        }
+    }
+
+    class AssignmentsCompare : IComparer<AssignmentModel>
+    {
+        public int Compare(AssignmentModel x, AssignmentModel y)
+        {
+            if (x.Status == y.Status)
+            {
+                return 0;
+            }
+
+            return x.Status.CompareTo(y.Status);
         }
     }
 }
