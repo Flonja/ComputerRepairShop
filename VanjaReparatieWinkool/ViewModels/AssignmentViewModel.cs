@@ -13,6 +13,6 @@ namespace VanjaReparatieWinkool.ViewModels
         public int KlantId { get; set; }
         public IEnumerable<CustomerModel> Klanten { get; set; }
         public int WerknemerId { get; set; }
-        public EmployeeModel Werknemer { get; set; }
+        public IEnumerable<EmployeeModel> Werknemers { get; set; }
     }
 }

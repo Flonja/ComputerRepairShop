@@ -39,6 +39,7 @@ namespace VanjaReparatieWinkool.Controllers
         {
             var viewModel = new AssignmentViewModel();
             viewModel.Klanten = db.Customers.ToList();
+            viewModel.Werknemers = db.Employees.ToList();
             //viewModel.Opdracht = 
             return View(viewModel);
         }
@@ -48,14 +49,15 @@ namespace VanjaReparatieWinkool.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "AssignmentId,Omschrijving,StartDatum,EindDatum")] AssignmentModel assignmentModel)
+        //[Bind(Include = "AssignmentId,Omschrijving,StartDatum,EindDatum")] 
+        public ActionResult Create(AssignmentViewModel assignmentModel)
         {
-            if (assignmentModel.StartDatum.CompareTo(DateTime.Today) < 0)
+            if (assignmentModel.Opdracht.StartDatum.CompareTo(DateTime.Today) < 0)
             {
                 ModelState.AddModelError("StartDatum", "");
             }
 
-            if (assignmentModel.EindDatum.CompareTo(assignmentModel.StartDatum) < 0)
+            if (assignmentModel.Opdracht.EindDatum.CompareTo(assignmentModel.Opdracht.StartDatum) < 0)
             {
                 ModelState.AddModelError("StartDatum", "");
                 ModelState.AddModelError("EindDatum", "");
@@ -63,10 +65,12 @@ namespace VanjaReparatieWinkool.Controllers
 
             if (ModelState.IsValid)
             {
-                assignmentModel.Uren = 0;
-                assignmentModel.Status = Status.InAfwachting;
+                assignmentModel.Opdracht.Uren = 0;
+                assignmentModel.Opdracht.Status = Status.InAfwachting;
+                assignmentModel.Opdracht.Klant = db.Customers.Find(assignmentModel.KlantId);
+                assignmentModel.Opdracht.Werknemer = db.Employees.Find(assignmentModel.WerknemerId);
 
-                db.Assignments.Add(assignmentModel);
+                db.Assignments.Add(assignmentModel.Opdracht);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
