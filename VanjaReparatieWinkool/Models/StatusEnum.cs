@@ -1,6 +1,6 @@
 ﻿namespace VanjaReparatieWinkool.Models
 {
-    public enum Status
+    public enum StatusEnum
     {
         InAfwachting, InBehandeling, WachtOpOnderdelen, Klaar
     }

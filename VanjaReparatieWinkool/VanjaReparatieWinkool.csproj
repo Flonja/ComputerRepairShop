@@ -128,6 +128,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AssignmentsController.cs" />
+    <Compile Include="Controllers\BillController.cs" />
+    <Compile Include="Extensions\MultiplyHtmlHelper.cs" />
+    <Compile Include="Migrations\202010061158090_fresh.cs" />
+    <Compile Include="Migrations\202010061158090_fresh.designer.cs">
+      <DependentUpon>202010061158090_fresh.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProvinciesEnum.cs" />
     <Compile Include="ViewModels\AssignmentStatus.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\CustomersController.cs" />
@@ -137,20 +144,17 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\202010021247527_fresh.cs" />
-    <Compile Include="Migrations\202010021247527_fresh.designer.cs">
-      <DependentUpon>202010021247527_fresh.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AssignmentModel.cs" />
     <Compile Include="Models\EmployeeModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\PartModel.cs" />
-    <Compile Include="Models\Status.cs" />
+    <Compile Include="Models\StatusEnum.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Controllers\PartsController.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModels\AssignmentViewModel.cs" />
+    <Compile Include="ViewModels\BillViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
@@ -209,9 +213,7 @@
     <Content Include="Views\Parts\Edit.cshtml" />
     <Content Include="Views\Parts\Index.cshtml" />
     <Content Include="Views\Shared\_Header.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Content Include="Views\Assignments\Bill.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -227,10 +229,11 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202010021247527_fresh.resx">
-      <DependentUpon>202010021247527_fresh.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202010061158090_fresh.resx">
+      <DependentUpon>202010061158090_fresh.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

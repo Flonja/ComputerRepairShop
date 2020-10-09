@@ -13,7 +13,7 @@ namespace VanjaReparatieWinkool.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "202010021247527_fresh"; }
+            get { return "202010061158090_fresh"; }
         }
         
         string IMigrationMetadata.Source

@@ -35,7 +35,7 @@
                         Achternaam = c.String(),
                         Adres = c.String(),
                         Postcode = c.String(),
-                        Provincie = c.String(),
+                        Provincie = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.CustomerId);
             
@@ -60,7 +60,7 @@
                         Achternaam = c.String(),
                         Adres = c.String(),
                         Postcode = c.String(),
-                        Provincie = c.String(),
+                        Provincie = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => t.EmployeeId);
             
