@@ -129,10 +129,11 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AssignmentsController.cs" />
     <Compile Include="Controllers\BillController.cs" />
+    <Compile Include="Extensions\MultipleButtonsAttribute.cs" />
     <Compile Include="Extensions\MultiplyHtmlHelper.cs" />
-    <Compile Include="Migrations\202010061158090_fresh.cs" />
-    <Compile Include="Migrations\202010061158090_fresh.designer.cs">
-      <DependentUpon>202010061158090_fresh.cs</DependentUpon>
+    <Compile Include="Migrations\202010090837503_fresh.cs" />
+    <Compile Include="Migrations\202010090837503_fresh.designer.cs">
+      <DependentUpon>202010090837503_fresh.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ProvinciesEnum.cs" />
     <Compile Include="ViewModels\AssignmentStatus.cs" />
@@ -229,11 +230,10 @@
     <Content Include="Scripts\jquery-3.4.1.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\202010061158090_fresh.resx">
-      <DependentUpon>202010061158090_fresh.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\202010090837503_fresh.resx">
+      <DependentUpon>202010090837503_fresh.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -1,9 +1,12 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using VanjaReparatieWinkool.DAL;
+using VanjaReparatieWinkool.Extensions;
 using VanjaReparatieWinkool.Models;
 using VanjaReparatieWinkool.ViewModels;
 
@@ -39,17 +42,32 @@ namespace VanjaReparatieWinkool.Controllers
             var viewModel = new AssignmentViewModel();
             viewModel.Klanten = db.Customers.ToList();
             viewModel.Werknemers = db.Employees.ToList();
-            //viewModel.Opdracht = 
+            viewModel.Onderdelen = db.Parts.ToList();
+            IEnumerable<PartModel> partModels = db.Parts.ToList();
+            viewModel.OnderdelenSLI = partModels.Select(x => new SelectListItem
+            {
+                Value = x.PartId.ToString(),
+                Text = x.Naam // the name of the property you want to use for the display text
+            });
+            //viewModel.Onderdelen = 
             return View(viewModel);
         }
 
-        // POST: Assignments/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
-        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        //[Bind(Include = "AssignmentId,Omschrijving,StartDatum,EindDatum")] 
-        public ActionResult Create(AssignmentViewModel assignmentModel)
+        //[MultipleButton(Name = "action", Argument = "AddPart")]
+        public ActionResult AddPart(AssignmentViewModel assignmentModel)
+        {
+            ModelState value;
+            if(ModelState.TryGetValue("GekozenOnderdeelId", out value))
+            {
+                int id;
+                int.TryParse(value.Value.AttemptedValue, out id);
+                assignmentModel.GekozenOnderdelen.Add(id);
+            }
+            return View();
+        }
+
+        public ActionResult Save(AssignmentViewModel assignmentModel)
         {
             if (assignmentModel.Opdracht.StartDatum.CompareTo(DateTime.Today) < 0)
             {
@@ -75,6 +93,27 @@ namespace VanjaReparatieWinkool.Controllers
             }
 
             return View(assignmentModel);
+        }
+
+        // POST: Assignments/Create
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        //[MultipleButton(Name = "action", Argument = "Create")]
+        //[Bind(Include = "submitButton,StartDatum,EindDatum")]
+        public ActionResult Create(AssignmentViewModel assignmentViewModel)
+        {
+            ModelState button;
+            ModelState.TryGetValue("submitButton", out button);
+            switch (button.Value.AttemptedValue)
+            {
+                case "AddPart":
+                    return AddPart(assignmentViewModel) ;
+                case "Save":
+                    return Save(assignmentViewModel);
+                default:
+                    return View(assignmentViewModel);
+            }
+            
         }
 
         // GET: Assignments/Edit/5
