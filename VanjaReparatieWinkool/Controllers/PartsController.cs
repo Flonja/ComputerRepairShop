@@ -9,7 +9,6 @@ namespace VanjaReparatieWinkool.Controllers
 {
     public class PartsController : SharedController
     {
-        private VanjaReparatieWinkoolContext db = new VanjaReparatieWinkoolContext();
 
         // GET: PartModels
         public ActionResult Index()

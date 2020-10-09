@@ -15,6 +15,6 @@ namespace VanjaReparatieWinkool.Models
         }
         public string Adres { get; set; }
         public string Postcode { get; set; }
-        public string Provincie { get; set; }
+        public ProvinciesEnum Provincie { get; set; }
     }
 }

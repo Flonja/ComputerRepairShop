@@ -1,0 +1,64 @@
+﻿@model VanjaReparatieWinkool.Models.AssignmentModel
+
+
+<h4>Factuur</h4>
+<hr />
+<div class="col-md-10">
+    @Html.DisplayFor(model => model.Klant.VolledigeNaam)<br />
+    @Html.DisplayFor(model => model.Klant.Adres)<br />
+    @Html.DisplayFor(model => model.Klant.Postcode)<br />
+    @Html.DisplayFor(model => model.Klant.Provincie)
+</div>
+<div class="col-md-1">   </div>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Onderdelen.FirstOrDefault().Aantal)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Onderdelen.FirstOrDefault().Naam)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Onderdelen.FirstOrDefault().Leverancier)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Onderdelen.FirstOrDefault().Prijs)
+        </th>
+        <th>
+            Totaal
+        </th>
+    </tr>
+    @foreach (var item in Model.Onderdelen)
+    {
+        decimal total = item.Prijs * item.Aantal; 
+        <tr>
+
+            <td>
+                @Html.DisplayFor(modelItem => item.Aantal)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Naam)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Leverancier)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Prijs)
+            </td>
+            <td>
+                @total
+            </td>
+        </tr>
+    }
+</table>
+<br />
+<div class="col-md-1">
+    @{
+        double total2 = Model.Uren * 40;
+    }
+    @Html.DisplayFor(model => model.Uren) |
+    @total2
+</div>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

@@ -11,7 +11,6 @@ namespace VanjaReparatieWinkool.Controllers
 {
     public class AssignmentsController : SharedController
     {
-        private VanjaReparatieWinkoolContext db = new VanjaReparatieWinkoolContext();
 
         // GET: Assignments
         public ActionResult Index()
@@ -66,7 +65,7 @@ namespace VanjaReparatieWinkool.Controllers
             if (ModelState.IsValid)
             {
                 assignmentModel.Opdracht.Uren = 0;
-                assignmentModel.Opdracht.Status = Status.InAfwachting;
+                assignmentModel.Opdracht.Status = StatusEnum.InAfwachting;
                 assignmentModel.Opdracht.Klant = db.Customers.Find(assignmentModel.KlantId);
                 assignmentModel.Opdracht.Werknemer = db.Employees.Find(assignmentModel.WerknemerId);
 
@@ -140,6 +139,13 @@ namespace VanjaReparatieWinkool.Controllers
             db.Assignments.Remove(assignmentModel);
             db.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        public ActionResult Bill(int id)
+        {
+            var model = db.Assignments.Find(id);
+            //model.Klant = db.Customers.Find(model.);
+            return View(model);
         }
 
         protected override void Dispose(bool disposing)

@@ -10,7 +10,7 @@ namespace VanjaReparatieWinkool.Models
         [Key]
         public int AssignmentId { get; set; }
         public string Omschrijving { get; set; }
-        public Status Status { get; set; }
+        public StatusEnum Status { get; set; }
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [DataType(DataType.Date)]
         public DateTime StartDatum { get; set; }

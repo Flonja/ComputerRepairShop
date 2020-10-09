@@ -10,10 +10,11 @@ namespace VanjaReparatieWinkool.Controllers
 {
     public class SharedController : Controller
     {
-        private VanjaReparatieWinkoolContext db = new VanjaReparatieWinkoolContext();
+        public VanjaReparatieWinkoolContext db = new VanjaReparatieWinkoolContext();
 
         [ChildActionOnly]
         public PartialViewResult _Header()
+
         {
             return PartialView(GetStatus());
         }

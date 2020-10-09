@@ -341,3 +341,6 @@ healthchecksdb
 
 App_Data/
 bin/
+
+*.mdf
+*.ldf
