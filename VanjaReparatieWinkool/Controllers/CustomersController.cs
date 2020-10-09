@@ -74,15 +74,21 @@ namespace VanjaReparatieWinkool.Controllers
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CustomerId,Voornaam,Achternaam,Adres,Postcode,Provincie")] CustomerModel customerModel)
+        public ActionResult Edit([Bind(Include = "CustomerId,Adres,Postcode,Provincie")] CustomerModel customerModelLocal)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(customerModel).State = EntityState.Modified;
+                CustomerModel customerModel = db.Customers.Find(customerModelLocal.CustomerId);
+                customerModelLocal.Voornaam = customerModel.Voornaam;
+                customerModelLocal.Achternaam = customerModel.Achternaam;
+
+                db.Customers.Remove(customerModel);
+                db.Customers.Add(customerModelLocal);
+
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            return View(customerModel);
+            return View(customerModelLocal);
         }
 
         // GET: CustomerModels/Delete/5

@@ -102,8 +102,6 @@ namespace VanjaReparatieWinkool.Controllers
             if (ModelState.IsValid)
             {
                 AssignmentModel assignmentModel = db.Assignments.Find(assignmentModelLocal.AssignmentId);
-                ModelState.Remove("StartDatum");
-
                 assignmentModelLocal.StartDatum = assignmentModel.StartDatum;
 
                 db.Assignments.Remove(assignmentModel);
