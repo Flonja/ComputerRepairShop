@@ -104,16 +104,16 @@ namespace VanjaReparatieWinkool.Controllers
         {
             ModelState button;
             ModelState.TryGetValue("submitButton", out button);
-            switch (button.Value.AttemptedValue)
-            {
-                case "AddPart":
-                    return AddPart(assignmentViewModel) ;
-                case "Save":
-                    return Save(assignmentViewModel);
-                default:
-                    return View(assignmentViewModel);
-            }
-            
+            //switch (button.Value.AttemptedValue)
+            //{
+            //    case "AddPart":
+            //        return AddPart(assignmentViewModel) ;
+            //    case "Save":
+            //        return Save(assignmentViewModel);
+            //    default:
+            //        return View(assignmentViewModel);
+            //}
+            return Save(assignmentViewModel);
         }
 
         // GET: Assignments/Edit/5

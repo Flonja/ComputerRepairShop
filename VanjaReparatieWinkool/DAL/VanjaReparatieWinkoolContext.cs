@@ -1,11 +1,10 @@
-﻿using Microsoft.AspNet.Identity.EntityFramework;
-using System.Data.Entity;
+﻿using System.Data.Entity;
 using System.Data.Entity.Validation;
 using VanjaReparatieWinkool.Models;
 
 namespace VanjaReparatieWinkool.DAL
 {
-    public class VanjaReparatieWinkoolContext : IdentityDbContext
+    public class VanjaReparatieWinkoolContext : DbContext
     {
         public VanjaReparatieWinkoolContext() : base("VanjaReparatieWinkool")
         {
